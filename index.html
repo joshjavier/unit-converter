@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <main>
+        
+        <header>
+            <h1>Metric/Imperial unit conversion</h1>
+            <input type="text" id="baseNum" value="20" pattern="[0-9]*">
+        </header>
+
+        <div class="computed">
+            <div>
+                <h2>Length (Meter/Feet)</h2>
+                <p>
+                    <span class="baseNum"></span> meters = <span id="computedFeet">65.616</span> feet | 
+                    <span class="baseNum"></span> feet = <span id="computedMeters">6.096</span> meters
+                </p>
+            </div>
+
+            <div>
+                <h2>Volume (Liters/Gallons)</h2>
+                <p>
+                    <span class="baseNum"></span> liters = <span id="computedGallons">5.284</span> gallons | 
+                    <span class="baseNum"></span> gallons = <span id="computedLiters">75.708</span> liters
+                </p>
+            </div>
+
+            <div>
+                <h2>Mass (Kilograms/Pounds)</h2>
+                <p>
+                    <span class="baseNum"></span> kilos = <span id="computedPounds">44.092</span> pounds | 
+                    <span class="baseNum"></span> pounds = <span id="computedKilos">9.072</span> kilos
+                </p>
+            </div>
+        </div>
+
+    </main>
+    <script src="index.js"></script>
+</body>
+</html>
