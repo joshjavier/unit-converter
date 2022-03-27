@@ -1,89 +1,84 @@
 * {
     box-sizing: border-box;
+    font-family: inherit;
+    line-height: inherit;
+    color: inherit;
+    padding: 0;
+    margin: 0;
 }
 
 html {
-    font-family: Inter;
-    font-size: 14px;
+    font-family: 'Inter', sans-serif;
     color: #4E4E4E;
 }
 
 body {
-    margin: 0;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     background: #1C1C1C;
 }
 
-h1, h2, p {
-    margin: 0;
+h1, input {
+    font-weight: 800;
 }
 
 h1 {
-    font-size: 22px;
-    font-weight: 800;
-    /*line-height: 1.72;*/
+    font-size: 1.375rem;  /* 22px */
+    letter-spacing: -1px;
+}
+
+h2, p {
+    font-size: 0.875rem;  /* 14px */
 }
 
 h2 {
-    font-size: 1rem;
     font-weight: 600;
     color: #1A1921;
 }
 
 p {
     line-height: 1.425;
+    margin-top: 0.75rem;  /* 12px */
 }
 
 input {
-    font-family: inherit;
     text-align: inherit;
     background: none;
-    color: inherit;
     border: none;
-    max-width: 100%;
+    width: 100%;
+    font-size: 6.125rem;  /* 98px */
+    padding-inline: 1rem;
 }
 
+input:hover,
 input:focus {
     outline: none;
     background: rgba(0,0,0,.1);
 }
 
-#baseNum {
-    font-size: 97.57px;
-    font-weight: 800;
-    line-height: 1;
-    margin-top: 32px;
-    align-self: center;
-}
-
 main {
-    width: 80%;
     max-width: 550px;
 }
 
 header {
-    padding: 53px;
+    padding: 50px 2em;
     background: linear-gradient(246.26deg, #585DFE 0%, #FB3796 100%);
-    height: 260px;
+    min-height: 260px;
     color: #FFFFFF;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 2rem;
 }
 
-div.computed {
+div.conversions {
     background: #FFFFFF;
     padding: 38px;
 }
 
-div.computed > * + * {
+div.conversions > * + * {
     margin-top: 38px;
-}
-
-div.computed p {
-    margin-top: 12px;
 }
