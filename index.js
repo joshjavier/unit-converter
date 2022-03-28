@@ -54,10 +54,40 @@ function render() {
 }
 
 
+/*------------------------------------*\
+  #EVENT-HANDLERS
+\*------------------------------------*/
+
+function validateInput(event) {
+  let value = event.target.value
+  const decimalCount = value.replace(/[^\.]/g, "").length
+
+  // Prevent the user from entering more than 1 decimal point
+  value = (decimalCount > 1) ? value.slice(0, -1)
+
+    // or non-digit characters
+    : value.replace(/[^\.\d]/g, "")
+
+  input.value = value
+}
+
+function blurInput(event) {
+  // Don't surprise users - make the Enter/Space key run the conversions
+  if (["Enter", " "].includes(event.key)) {
+    input.blur()
+  }
+}
+
+function runConversion(event) {
+  const value = event.target.value
+  baseValue = Number(value) || 0
+  render()
 }
 
 
-
+input.addEventListener('input', validateInput)
+input.addEventListener('keyup', blurInput)
+input.addEventListener('blur', runConversion)
 
 
 // Initialize
