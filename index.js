@@ -1,76 +1,65 @@
-const baseNumElem = document.getElementById('baseNum')
-const baseNumElems = document.getElementsByClassName('baseNum')
-const computedFeetElem = document.getElementById('computedFeet')
-const computedMetersElem = document.getElementById('computedMeters')
-const computedGallonsElem = document.getElementById('computedGallons')
-const computedLitersElem = document.getElementById('computedLiters')
-const computedPoundsElem = document.getElementById('computedPounds')
-const computedKilosElem = document.getElementById('computedKilos')
+const input = document.getElementById("input")
+const conversions = document.getElementById("conversions")
 
 
+/*------------------------------------*\
+  #CONVERSION-FUNCTIONS
+\*------------------------------------*/
 
-function meterToFeet(num) {
-  return num * 3.28084
-}
-
-function feetToMeter(num) {
-  return num * 0.3048
-}
-
-function literToGallon(num) {
-  return num * 0.264172
-}
-
-function gallonToLiter(num) {
-  return num * 3.78541
-}
-
-function kilogramToPound(num) {
-  return num * 2.20462
-}
-
-function poundToKilogram(num) {
-  return num * 0.453592
-}
-
-
-function updateBaseNum(input) {
-  let num = Number(input)
-  if (!num && num !== 0) {
-    alert('Please enter a number ☺️')
-    baseNumElem.value = baseNum // revert to the previous base number
-    return
-  }
-  baseNum = num
-  baseNumElem.value = baseNum
-  for (let elem of baseNumElems) {
-    elem.textContent = baseNum
+function convert(factor, targetUnit) {
+  const value = baseValue * factor
+  const unit = (value === 1) ? targetUnit[0] : targetUnit[1]
+  return {
+    value: value.toFixed(3),
+    unit: unit
   }
 }
 
+function generateText(unit1, unit2) {
+  const _units = [unit1, unit2]
+  const converted = _units.map(unit => convert(factors[unit], units[unit]))
 
-function updateComputedValues(num) {
-  computedFeetElem.textContent = meterToFeet(num).toFixed(3)
-  computedMetersElem.textContent = feetToMeter(num).toFixed(3)
-  computedGallonsElem.textContent = literToGallon(num).toFixed(3)
-  computedLitersElem.textContent = gallonToLiter(num).toFixed(3)
-  computedPoundsElem.textContent = kilogramToPound(num).toFixed(3)
-  computedKilosElem.textContent = poundToKilogram(num).toFixed(3)  
+  _units.reverse()
+  let result = []
+  for (let i = 0; i < converted.length; i++) {
+    const baseUnit = (baseValue === 1) ? units[_units[i]][0] : units[_units[i]][1]
+    const text = `${baseValue} ${baseUnit} = ${converted[i].value} ${converted[i].unit}`
+    result.push(text)
+  }
+
+  return result.join(" | ")
+}
+
+function generateConversions(data) {
+  return data.map(item => {
+    const container = document.createElement("div")
+    const title = document.createElement("h2")
+    const text = document.createElement("p")
+
+    title.textContent = item.title
+    text.textContent = generateText(item.unit1, item.unit2)
+
+    container.append(title, text)
+    return container
+  })
+}
+
+function render() {
+  // Display/update the base value
+  input.value = baseValue
+
+  // Display/update the conversions
+  conversions.textContent = ""
+  conversions.append( ...generateConversions(data) )
 }
 
 
-let baseNum = 20
-updateBaseNum(baseNum)
-updateComputedValues(baseNum)
-
-baseNumElem.addEventListener('blur', () => {
-  let input = baseNumElem.value
-  updateBaseNum(input)
-  updateComputedValues(baseNum)
-})
+}
 
 
-/**
- * Bugs:
- * - How to deal with text overflow? longer than 6 characters
- */
+
+
+
+// Initialize
+let baseValue = 20
+render()

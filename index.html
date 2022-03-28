@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="index.css">
+    <script defer src="conversion.js"></script>
+    <script defer src="index.js"></script>
 </head>
 <body>
     <main>
@@ -20,33 +22,8 @@
             <input type="text" id="baseNum" value="20" pattern="[0-9]*">
         </header>
 
-        <div class="conversions">
-            <div>
-                <h2>Length (Meter/Feet)</h2>
-                <p>
-                    <span class="baseNum"></span> meters = <span id="computedFeet">65.616</span> feet | 
-                    <span class="baseNum"></span> feet = <span id="computedMeters">6.096</span> meters
-                </p>
-            </div>
-
-            <div>
-                <h2>Volume (Liters/Gallons)</h2>
-                <p>
-                    <span class="baseNum"></span> liters = <span id="computedGallons">5.284</span> gallons | 
-                    <span class="baseNum"></span> gallons = <span id="computedLiters">75.708</span> liters
-                </p>
-            </div>
-
-            <div>
-                <h2>Mass (Kilograms/Pounds)</h2>
-                <p>
-                    <span class="baseNum"></span> kilos = <span id="computedPounds">44.092</span> pounds | 
-                    <span class="baseNum"></span> pounds = <span id="computedKilos">9.072</span> kilos
-                </p>
-            </div>
-        </div>
+        <div class="conversions" id="conversions"></div>
 
     </main>
-    <script src="index.js"></script>
 </body>
 </html>
