@@ -49,7 +49,7 @@ function generateConversions(data) {
 
 function render() {
   // Display/update the base value
-  input.value = baseValue
+  input.value = baseValue.toLocaleString("en-US")
 
   // Display/update the conversions
   conversions.textContent = ""
@@ -62,22 +62,28 @@ function render() {
 \*------------------------------------*/
 
 function validateInput(event) {
-  let value = event.target.value
-  const decimalCount = value.replace(/[^\.]/g, "").length
+  if (event.type === "focus") {
+    event.target.value = baseValue
+  }
 
-  // Prevent the user from entering more than 1 decimal point
-  value = (decimalCount > 1) ? value.slice(0, -1)
+  if (event.type === "input") {
+    const value = event.target.value
+    const decimalCount = value.replace(/[^\.]/g, "").length
 
-    // or non-digit characters
-    : value.replace(/[^\.\d]/g, "")
+    // Prevent the user from entering more than 1 decimal point
+    let newValue = (decimalCount > 1) ? value.slice(0, -1)
 
-  input.value = value
+      // or non-digit characters
+      : value.replace(/[^\.\d]/g, "")
+
+    event.target.value = newValue
+  }
 }
 
 function blurInput(event) {
   // Don't surprise users - make the Enter/Space key run the conversions
   if (["Enter", " "].includes(event.key)) {
-    input.blur()
+    event.target.blur()
   }
 }
 
@@ -88,6 +94,7 @@ function runConversion(event) {
 }
 
 
+input.addEventListener('focus', validateInput)
 input.addEventListener('input', validateInput)
 input.addEventListener('keyup', blurInput)
 input.addEventListener('blur', runConversion)
