@@ -70,13 +70,19 @@ function validateInput(event) {
     const value = event.target.value
     const decimalCount = value.replace(/[^\.]/g, "").length
 
+    // Prevent the user from entering non-digit characters
+    let sanitizedValue = value.replace(/[^\.\d]/g, "")
+
     // Prevent the user from entering more than 1 decimal point
-    let newValue = (decimalCount > 1) ? value.slice(0, -1)
+    if (decimalCount > 1) {
+      const index = value.indexOf(".")
+      const wholeNumber = value.slice(0, index)
+      const fractionalPart = value.slice(index).replace(/\./g, "")
 
-      // or non-digit characters
-      : value.replace(/[^\.\d]/g, "")
+      sanitizedValue = wholeNumber + "." + fractionalPart
+    }
 
-    event.target.value = newValue
+    event.target.value = sanitizedValue
   }
 }
 
