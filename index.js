@@ -9,8 +9,9 @@ const conversions = document.getElementById("conversions")
 function convert(factor, targetUnit) {
   const value = baseValue * factor
   const unit = (value === 1) ? targetUnit[0] : targetUnit[1]
+
   return {
-    value: value.toFixed(3),
+    value: value,
     unit: unit
   }
 }
@@ -23,7 +24,9 @@ function generateText(unit1, unit2) {
   let result = []
   for (let i = 0; i < converted.length; i++) {
     const baseUnit = (baseValue === 1) ? units[_units[i]][0] : units[_units[i]][1]
-    const text = `${baseValue} ${baseUnit} = ${converted[i].value} ${converted[i].unit}`
+    const baseString = `${baseValue.toLocaleString("en-US")} ${baseUnit}`
+    const convertedString = `${converted[i].value.toLocaleString("en-US")} ${converted[i].unit}`
+    const text = `${baseString} = ${convertedString}`
     result.push(text)
   }
 
