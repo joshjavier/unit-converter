@@ -1,3 +1,5 @@
+import * as conversion from "./conversion.js"
+
 const input = document.getElementById("input")
 const conversions = document.getElementById("conversions")
 
@@ -18,12 +20,12 @@ function convert(factor, targetUnit) {
 
 function generateText(unit1, unit2) {
   const _units = [unit1, unit2]
-  const converted = _units.map(unit => convert(factors[unit], units[unit]))
+  const converted = _units.map(unit => convert(conversion.factors[unit], conversion.units[unit]))
 
   _units.reverse()
   let result = []
   for (let i = 0; i < converted.length; i++) {
-    const baseUnit = (baseValue === 1) ? units[_units[i]][0] : units[_units[i]][1]
+    const baseUnit = (baseValue === 1) ? conversion.units[_units[i]][0] : conversion.units[_units[i]][1]
     const baseString = `${baseValue.toLocaleString("en-US")} ${baseUnit}`
     const convertedString = `${converted[i].value.toLocaleString("en-US")} ${converted[i].unit}`
     const text = `${baseString} = ${convertedString}`
@@ -53,7 +55,7 @@ function render() {
 
   // Display/update the conversions
   conversions.textContent = ""
-  conversions.append( ...generateConversions(data) )
+  conversions.append( ...generateConversions(conversion.data) )
 }
 
 

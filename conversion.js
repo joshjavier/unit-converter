@@ -55,3 +55,5 @@ const data = [
 
   // Add new conversion items here following the format above
 ]
+
+export { factors, units, data }
